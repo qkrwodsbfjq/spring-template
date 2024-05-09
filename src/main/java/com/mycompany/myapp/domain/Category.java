@@ -1,19 +1,21 @@
 package com.mycompany.myapp.domain;
 
 import lombok.*;
-import com.mycompany.myapp.domain.base.BaseEntity;
+
 import javax.persistence.*;
 
 @Entity
-@Builder
-@Getter
+@Builder @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Test extends BaseEntity {
-
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(nullable = false)
     private String name;
